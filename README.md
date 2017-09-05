@@ -24,12 +24,18 @@ The containers are linked internally, so if you are configuring a database conec
 ## Starting point
 
 * You need to create a copy of the .env.example file and name it .env. In this file you have to put your current user name. Docker will create an user with that exact name inside the containers for you to and your containers to be able to write and read to your project's files.
+* Open ***volumes/apache/conf/httpd.conf*** and change User and Group to your current user.
+* Create a virtual host and place it on ***volumes/apache/conf/vhosts*** it will automatically loaded.
 * Open a terminal inside this repo root folder and run docker-compose
 	* ***Considerations***
 		* Docker Compose as it is configured right now, creates a volume with the content of its parent directory.
 
 ```docker-compose up -d```
 * Done! You now have a LAMP environment
+
+### Creating new virtualhosts
+
+* Just put a new virtual host inside ***volumes/apache/conf/vhosts*** and restart the apache container
 
 ### Other commands
 

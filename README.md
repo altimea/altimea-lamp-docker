@@ -25,7 +25,7 @@ The containers are linked internally, so if you are configuring a database conec
 
 * You need to create a copy of the .env.example file and name it .env. In this file you have to put your current user name. Docker will create an user with that exact name inside the containers for you to and your containers to be able to write and read to your project's files.
 * Open ***volumes/apache/conf/httpd.conf*** and change User and Group to your current user.
-* Create a virtual host and place it on ***volumes/apache/conf/vhosts*** it will automatically loaded.
+* Create a virtual host and place it on ***volumes/apache/conf/vhosts*** it will automatically be loaded.
 * Open a terminal inside this repo root folder and run docker-compose
 	* ***Considerations***
 		* Docker Compose as it is configured right now, creates a volume with the content of its parent directory.

@@ -1,0 +1,42 @@
+version: '2'
+
+volumes:
+  database_data:
+    driver: local
+
+services:
+  apache:
+    build:
+      context: ./dockerfiles/apache/
+      args:
+        CONTAINER_USER: ${CONTAINER_USER}
+    ports:
+      - 80:80
+    volumes:
+      - ./volumes/apache/conf/:/usr/local/apache2/conf
+      - ./volumes/apache/logs/:/usr/local/apache2/logs
+    volumes_from:
+      - php
+
+  php:
+    build:
+      context: ./dockerfiles/php/
+      args:
+        CONTAINER_USER: ${CONTAINER_USER}
+    expose:
+      - 9000
+    volumes:
+      - ../:/var/www/html
+
+  mysql:
+    image: mysql:latest
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+    volumes:
+      - database_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
